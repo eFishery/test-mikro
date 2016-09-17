@@ -14,6 +14,10 @@ setup(name='test_mikro',
       license='MIT',
       packages=['test_mikro'],
       include_package_data=True,
+      scripts=['bin/test_mikro'],
+      entry_points = {
+      	'console_scripts': ['test_mikro=test_mikro.command_line:main'],
+      }
       zip_safe=False,
       test_suite='nose.collector',
       tests_require=['nose'],
