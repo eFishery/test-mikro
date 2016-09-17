@@ -1,4 +1,3 @@
-import time
 import sys
 import glob
 import serial
