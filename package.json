@@ -1,0 +1,17 @@
+{
+  "name": "dogado",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ans4175 <ans4175@gmail.com> (http://ans-4175.github.io/)",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "lodash": "^4.13.1",
+    "serialport": "^3.1.2",
+    "vorpal": "^1.11.2"
+  }
+}
