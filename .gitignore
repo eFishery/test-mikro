@@ -8,4 +8,5 @@
 /*.egg-info
 /*.egg
 
-fixture.json
+fixtures.json
+tserial.py
