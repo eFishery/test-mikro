@@ -8,7 +8,7 @@ For quick test, use `assert_serial.py`
 Copy `fixtures.json.template` and define fixtures for your tests.  
 Command types:  
 + Non Params : `"command":"AT+TIME?"`  
-+ Params : `"command":"AT+TIME={}"`, there you should include params key in fixture object, like this:  
++ Params : `"command":"AT+TIME={}"`, there you should put param wildcard `{}` and include params key respectivefully with ordered value in fixture object, like this:  
 ```
 {
 	"command":"AT+TIME={}",
