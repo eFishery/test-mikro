@@ -23,6 +23,4 @@ fixtures, will use *./fixtures.json* path
 baudrate, will use *115200* value
 So you just could run it with `python assert_serial.py`
 
-![alt text][examples]
-
-[examples]: http://giphy.com/gifs/arduino-serial-efishery-3oz8xzy70PJQs9jmb6 "Test Assertion Serial"
+![](http://giphy.com/gifs/arduino-serial-efishery-3oz8xzy70PJQs9jmb6)
