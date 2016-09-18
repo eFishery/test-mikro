@@ -1,4 +1,5 @@
 #!/usr/bin/env python
 
 import test_mikro
-print test_mikro.list_ports()
+
+print test_mikro.send_command('','AT')

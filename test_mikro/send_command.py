@@ -6,7 +6,6 @@ def send_command(port,command):
     if port == '':
         ports = list_ports()
         port = ports[0]
-    print port
     # configure the serial connections (the parameters differs on the device you are connecting to)
     ser = serial.Serial(
         port=port,
@@ -17,12 +16,11 @@ def send_command(port,command):
     )
     if not ser.isOpen():
         ser.open()
-    print ser.portstr
     ser.write(command + '\r\n')
     out = ''
     # let's wait a moment reading output (let's give device time to answer)
-    time.sleep(0.8)
+    time.sleep(3)
     while ser.inWaiting() > 0:
       out += ser.read(1)
-      
+
     return out
