@@ -95,7 +95,11 @@ def main(argv):
         time.sleep(DELAY_MESSAGE)
         for fixture in data['fixtures']:
             ser.flushInput()
-            command_test = fixture['command'].encode('utf-8')
+            command_test = fixture['command']
+            if "{}" in command_test:
+              params = fixture['params']
+              command_test = command_test.format(*params)
+            command_test = command_test.encode('utf-8')
             assert_test = fixture['assert']
             expect_test = fixture['expect']
             result_test = True
