@@ -6,6 +6,17 @@ For quick test, use `assert_serial.py`
 
 # HOW TO USE
 Copy `fixtures.json.template` and define fixtures for your tests.  
+Command types:  
++ Non Params : `"command":"AT+TIME?"`  
++ Params : `"command":"AT+TIME={}"`, there you should include params key in fixture object, like this:  
+```
+{
+	"command":"AT+TIME={}",
+	"params":["1474197975"],
+	"assert":"contain",
+	"expect":"OK"
+}
+```
 Assertion types:  
 + `exact`, will check exact string of given command and expect value.  
 + `contain`, will check string given of command and expect value.  
