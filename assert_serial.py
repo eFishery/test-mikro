@@ -2,9 +2,32 @@
 
 import time
 import sys
+import glob
 import getopt
 import serial
 import json
+
+#list ports
+def list_ports():
+  if sys.platform.startswith('win'):
+      ports = ['COM%s' % (i + 1) for i in range(256)]
+  elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+      # this excludes your current terminal "/dev/tty"
+      ports = glob.glob('/dev/tty[A-Za-z]*')
+  elif sys.platform.startswith('darwin'):
+      ports = glob.glob('/dev/tty.*')
+  else:
+      raise EnvironmentError('Unsupported platform')
+
+  result = []
+  for port in ports:
+      try:
+          s = serial.Serial(port)
+          s.close()
+          result.append(port)
+      except (OSError, serial.SerialException):
+          pass
+  return result
 
 # print with format
 def print_decorator(print_type, msg):
@@ -24,7 +47,7 @@ def print_decorator(print_type, msg):
 DELAY_MESSAGE = 2
 CRLF = '\r\n'
 DEFAULT_BAUDRATE = 115200
-DEFAULT_PORT = '/dev/ttyUSB0'
+DEFAULT_PORT = list_ports()[0]
 DEFAULT_FIXTURE = './fixtures.json'
 
 def main(argv):
@@ -34,13 +57,13 @@ def main(argv):
     baudrate = 0
     fixture_passed = True
     try:
-      opts, args = getopt.getopt(argv,"hi:o:",["port=","fixtures="])
+      opts, args = getopt.getopt(argv,"hi:o:",["port=","fixtures=",'baudrate='])
     except getopt.GetoptError:
-      print_decorator('WARNING','assert_serial.py -p <port> -f <fixtures_file> -b <baudrate_value>')
+      print_decorator('WARNING','assert_serial.py --port <port> --fixtures <fixtures_file> --baudrate <baudrate_value>')
       sys.exit(2)
     for opt, arg in opts:
       if opt in ("-h", "--help"):
-         print_decorator('WARNING','assert_serial.py -p <port> -f <fixtures_file>')
+         print_decorator('WARNING','assert_serial.py -p <port> -f <fixtures_file> -b <baudrate_value>')
          sys.exit()
       elif opt in ("-p", "--port"):
          port = arg
