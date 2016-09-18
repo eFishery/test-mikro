@@ -127,6 +127,8 @@ def main(argv):
                 result_test = False
               # test passed?
               if not result_test:
+                if assert_test == 'contains':
+                    expect_test = ", ".join(expect_test)
                 print_decorator('OKBLUE'," ?expected: "+expect_test)
                 print_decorator('FAIL'," !actual: "+incoming_msg)
               test_color = 'OKGREEN' if result_test else 'FAIL'
