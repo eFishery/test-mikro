@@ -7,14 +7,20 @@
 			"expect":"OK"
 		},
 		{
-			"command":"AT+VRSI",
-			"assert":"contains",
-			"expect":["1.0.1","Arwana"]
+			"command":"AT+TIME={}",
+			"params":["1474197975"],
+			"assert":"contain",
+			"expect":"OK"
 		},
 		{
 			"command":"AT+TIME?",
-			"assert":"contain",
-			"expect":"+TIME"
+			"assert":"contains",
+			"expect":["+TIME","14741979"]
+		},
+		{
+			"command":"AT+VRSI",
+			"assert":"contains",
+			"expect":["1.0.1","Arwana"]
 		}
 	]
 }
