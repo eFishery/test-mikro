@@ -8,8 +8,8 @@
 		},
 		{
 			"command":"AT+VRSI",
-			"assert":"contain",
-			"expect":"1.0.1"
+			"assert":"contains",
+			"expect":["1.0.1","Arwana"]
 		},
 		{
 			"command":"AT+TIME?",
