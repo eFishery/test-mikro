@@ -76,18 +76,16 @@ def main(argv):
     fixtures_file = fixtures_file if (fixtures_file != '') else DEFAULT_FIXTURE
     baudrate = baudrate if (baudrate > 0) else DEFAULT_BAUDRATE
     # configure the serial connections (the parameters differs on the device you are connecting to)
+    # the device use 8 data bit, none parity bit, and one stop bit setting.
     ser = serial.Serial(
         port=port,
-        baudrate=baudrate,
-        parity=serial.PARITY_ODD,
-        stopbits=serial.STOPBITS_TWO,
-        bytesize=serial.SEVENBITS
+        baudrate=baudrate
     )
     # check if serial is opened
     if not ser.isOpen():
         ser.open()
     # open fixtures
-    with open(fixtures_file) as data_file:    
+    with open(fixtures_file) as data_file:
         data = json.load(data_file)
         print_decorator('HEADER',data['title']+CRLF)
         test_command = 'AT'.encode() + CRLF
@@ -115,7 +113,7 @@ def main(argv):
               print_decorator('OKBLUE',"reply:"+CRLF+incoming_msg)
               # assertion
               if assert_test == 'exact':
-                result_test = incoming_msg == expect_test 
+                result_test = incoming_msg == expect_test
               elif assert_test == 'contain':
                 result_test = expect_test in incoming_msg
               elif assert_test == 'contains':
@@ -136,6 +134,6 @@ def main(argv):
         test_color = 'OKGREEN' if fixture_passed else 'FAIL'
         print_decorator(test_color,"fixtures passed: "+str(fixture_passed))
         exit()
-    
+
 if __name__ == "__main__":
     main(sys.argv[1:])
