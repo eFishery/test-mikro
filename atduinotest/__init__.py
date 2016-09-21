@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import time
 import sys
 import glob
@@ -48,9 +46,11 @@ DELAY_MESSAGE = 2
 CRLF = '\r\n'
 DEFAULT_BAUDRATE = 115200
 DEFAULT_PORT = list_ports()[0]
-DEFAULT_FIXTURE = '../fixtures.json'
+DEFAULT_FIXTURE = './fixtures.json'
 
-def main(argv):
+def cli(argv=None):
+    if argv == None:
+      argv = sys.argv[1:]
     # get input
     port = ''
     fixtures_file = ''
@@ -59,11 +59,11 @@ def main(argv):
     try:
       opts, args = getopt.getopt(argv,"hi:o:",["port=","fixtures=",'baudrate=','list'])
     except getopt.GetoptError:
-      print_decorator('WARNING','assert_serial.py --port <port> --fixtures <fixtures_file> --baudrate <baudrate_value>')
+      print_decorator('WARNING','--list | --port <port> --fixtures <fixtures_file> --baudrate <baudrate_value>')
       sys.exit(2)
     for opt, arg in opts:
       if opt in ("-h", "--help"):
-         print_decorator('WARNING','assert_serial.py -p <port> -f <fixtures_file> -b <baudrate_value>')
+         print_decorator('WARNING','--list | --port <port> --fixtures <fixtures_file> --baudrate <baudrate_value>')
          sys.exit()
       elif opt in ("-p", "--port"):
          port = arg
@@ -146,6 +146,3 @@ def main(argv):
         test_color = 'OKGREEN' if fixture_passed else 'FAIL'
         print_decorator(test_color,"fixtures passed: "+str(fixture_passed))
         exit()
-
-if __name__ == "__main__":
-    main(sys.argv[1:])
