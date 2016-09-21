@@ -57,7 +57,7 @@ def main(argv):
     baudrate = 0
     fixture_passed = True
     try:
-      opts, args = getopt.getopt(argv,"hi:o:",["port=","fixtures=",'baudrate='])
+      opts, args = getopt.getopt(argv,"hi:o:",["port=","fixtures=",'baudrate=','list'])
     except getopt.GetoptError:
       print_decorator('WARNING','assert_serial.py --port <port> --fixtures <fixtures_file> --baudrate <baudrate_value>')
       sys.exit(2)
@@ -71,6 +71,12 @@ def main(argv):
          fixtures_file = arg
       elif opt in ("-b", "--baudrate"):
          baudrate = arg
+      elif opt in ("-l", "--list"):
+         ports = list_ports();
+         for port in ports:
+             print(port)
+         sys.exit(0)
+         
     # default value
     port = port if (port != '') else DEFAULT_PORT
     fixtures_file = fixtures_file if (fixtures_file != '') else DEFAULT_FIXTURE
