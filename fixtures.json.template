@@ -15,12 +15,12 @@
 		{
 			"command":"AT+TIME?",
 			"assert":"contains",
-			"expect":["+TIME","14741979"]
+			"expect":["+TIME","147419797"]
 		},
 		{
 			"command":"AT+VRSI",
 			"assert":"contains",
-			"expect":["1.0.1","Arwana"]
+			"expect":["1.0.3","Arwana"]
 		}
 	]
 }
